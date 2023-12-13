@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sample HTML Page</title>
 </head>
 <body>
-    <script src="script.js"> </script>
+      <div>
+            <label for="kylg-a">Külje a pikkus</label>
+            <input type="number" id="kylg-a">
+            <label for="kylg-b">Külje b pikkus</label>
+            <input type="number" id="kylg-b">
+            <button onclick="calculateHypotenuse()">Arvuta</button>
+            <p id="vastus"></p>
+      </div>
+
+      <script>
+            async function calculateHypotenuse() {
+                const a = parseFloat(document.getElementById("kylg-a").value);
+                const b = parseFloat(document.getElementById("kylg-b").value);
+                console.log(a,b);
+                const res = await fetch(`/calculate?a=${a}&b=${b}`);
+                const data = await res.json();
+                document.getElementById("vastus").innerText = data.answer;
+            }
+      </script>
 </body>
 </html>
